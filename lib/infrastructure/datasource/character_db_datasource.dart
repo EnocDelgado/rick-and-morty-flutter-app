@@ -38,9 +38,20 @@ class CharacterDbDatasource extends CharacterDatasource {
   }
   
   @override
-  Future<List<Character>> getCharacters({int page = 1}) {
-    // TODO: implement getCharacters
+  Future<List<Character>> getCharacters({int page = 1}) async {
+
+    // final response = await dio.get('/character');
+    // final characterResponse = CharacterResponse.fromJson( response.data );
+
+    // final List<Character> characters = characterResponse.results
+    // .where( ( element ) => false )
+    // .map(
+    //   ( data ) => CharacterMapper.charactertToEntiity( data )
+    // ).toList();
+
+    // return characters;
+    // TODO: implement getEpisodes
     throw UnimplementedError();
   }
-
+// 
 }

@@ -1,37 +1,33 @@
-
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rick_and_morty_app/domain/domain.dart';
 import 'package:rick_and_morty_app/presentation/providers/characters/characters_repository_provider.dart';
 
-final characterProvider = StateNotifierProvider<CharacterNotifier, Map<String, List<Character>>>((ref) {
+
+final charactersProvider = StateNotifierProvider<CharacterNotifier, Map<String, Character>>((ref) {
   
   final charactersRepository = ref.watch( charactersRepositoryProvider );
 
-  return CharacterNotifier( fetchMoreCharacters:  charactersRepository.getCharacters );
+  return CharacterNotifier( getCharacter:  charactersRepository.getCharacterById );
 });
 
-typedef GetCharacterCallback = Future<List<Character>>Function({ int page });
 
-class CharacterNotifier extends StateNotifier<Map<String, List<Character>>> {
+typedef GetCharacterCallback = Future<Character>Function( String id );
 
-  int currentPage = 0;
-  bool isLoading = false;
-  final GetCharacterCallback fetchMoreCharacters;
+class CharacterNotifier extends StateNotifier<Map<String, Character>> {
+
+  final GetCharacterCallback getCharacter;
 
   CharacterNotifier({
-    required this.fetchMoreCharacters
+    required this.getCharacter
   }): super ({});
 
   Future<void> loadCharacters( String id ) async {
-    if ( isLoading ) return;
-    isLoading = true;
 
-    currentPage++;
-    final List<Character> characters = await fetchMoreCharacters( page: currentPage );
-    state = { ...state, id: characters };
+    // validation
+    if ( state[ id ] != null ) return;
 
-    await Future.delayed( const Duration( milliseconds: 300 ) );
-    isLoading = false;
+    final Character character = await getCharacter( id );
+    state = { ...state, id: character }; 
   }
+
 }

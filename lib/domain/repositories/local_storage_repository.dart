@@ -4,8 +4,8 @@ abstract class LocalStorageRepository {
 
   Future<void> toggleFavorite( Character movie );
   
-  // Future<bool> isCharacterFavorite( int movieId );
+  Future<bool> isFavoriteCharacter( int movieId );
 
-  // Future<List<Character>> loadCharacters({ int limit = 10, offset = 0 });
+  Future<List<Character>> loadCharacters({ int limit = 10, offset = 0 });
   
 }

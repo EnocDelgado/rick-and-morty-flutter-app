@@ -1,5 +1,11 @@
+
+import 'package:isar/isar.dart';
+
+part 'character.g.dart';
+
+@Collection()
 class Character {
-    final int id;
+    Id isarId;
     final String name;
     final String status;
     final String species;
@@ -13,7 +19,7 @@ class Character {
     final DateTime created;
 
     Character({
-        required this.id,
+        required this.isarId,
         required this.name,
         required this.status,
         required this.species,

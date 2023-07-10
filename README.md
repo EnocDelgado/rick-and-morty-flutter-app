@@ -1,4 +1,4 @@
-# rick_and_morty_app
+# Rick And Morty App
 
 A new Flutter project.
 
